@@ -20,13 +20,13 @@ In this article: https://en.wikipedia.org/wiki/OBD-II_PIDs the Modes and PIDs ar
 
 ### The "OBD2 SocketCan Interface"-Block
 #### Inputs:
-1. **OBD2_PID**: specific parameter ID for a vehicle status or parameter or information (e.g. 13 = vehicle speed)
+1. **OBD2_PID**: specific parameter ID for a vehicle status or parameter (e.g. 13 = vehicle speed)
 2. **OBD2_Mode**: they are 10 different modes for OBD2 (e.g. 1 = current data, 2 = freeze frame data etc.)
 
 #### Output:
 1. **Identifier**: The identifier of the ecu response message
 2. **Returned_Bytes**: the number of returned data bytes
-3. **Mode**: the mode the response message is in (e.g. Mode 1 = current data)
+3. **Mode**: the mode, the response message is in (e.g. Mode 1 = current data)
 4. **A**: the first usable data byte.
 5. **B**: the second usable data byte.
 6. **C**: the third usable data byte.
