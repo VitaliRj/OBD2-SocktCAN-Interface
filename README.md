@@ -1,6 +1,6 @@
 # OBD2-SocktCan-Interface
 
-This Simulink library/Add-On provides an OBD2 (On-board diagnostics) block for basic communication, data logging and vehicle diagnostics.
+This MATLAB/Simulink library/Add-On provides an OBD2 (On-board diagnostics) block for basic communication, data logging and vehicle diagnostics.
 
 The block, included in this library, is intended to be used with SocketCan on a Linux target. For example, a RaspberryPi or a BeagleBone Black. 
 
@@ -35,4 +35,10 @@ In this article: https://en.wikipedia.org/wiki/OBD-II_PIDs the Modes and PIDs ar
 9. **Raw_Date[8]**: the raw can message data vector
 10. **New_Message_Trigger**: this value is set to 1 if a new message has arrived in the current time step.
 
-## How to
+# How to:
+### Prepare your Hardware
+
+This example is for the Raspberry Pi 2.
+
+#### 1. Install the Simulink Support Package for Raspberry Pi Hardware
+
