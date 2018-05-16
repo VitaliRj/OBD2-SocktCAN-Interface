@@ -41,4 +41,44 @@ In this article: https://en.wikipedia.org/wiki/OBD-II_PIDs the Modes and PIDs ar
 This example is for the Raspberry Pi 2.
 
 #### 1. Install the Simulink Support Package for Raspberry Pi Hardware
+Go to MATLAB -> HOME -> Add-Ons -> Get Hardware Support Packages
+
+![Image of example](/images/matlab_1.PNG)
+
+Install the following support packages for 
+* MATLAB Support Package for Raspberry Pi Hardware
+* Simulink Support Package for Raspberry Pi Hardware
+
+![Image of example](/images/matlab_2.PNG)
+
+Follow the instructions given by MATLAB to prepare your SD-Card
+
+![Image of example](/images/matlab_4.PNG)
+
+You can always put up the setup for the SD-Card using:
+
+> `>> targetupdater`
+
+in the MATLAB Command Window.
+
+####Connect to your hardware:
+1. Connect the Raspi to your network and access it remotely using:
+* putty.exe
+
+or
+
+* using MATLAB:
+
+type:
+
+> `>> p = raspi`
+
+> `>> p.openShell`
+
+Your output should look somethink like this:
+
+![Image of example](/images/matlab_5.PNG)
+
+
+
 
