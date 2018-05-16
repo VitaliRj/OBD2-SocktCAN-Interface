@@ -1,2 +1,5 @@
 # OBD2-SocktCan-Interface
-A test repository
+
+This Simulink library/Add-On provides an OBD2 (On-board diagnostics) block for basic communication, data logging and vehicle diagnostics.
+
+The block, included in this library is intended to be used with SocketCan on Linux target hardware. For example, a Raspberry Pi or a BeagleBone Black. 
