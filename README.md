@@ -9,9 +9,6 @@ To get e.g. the engine RPM, the "OBD2 SocketCan Interface" Block has to generate
 
 In this article: https://en.wikipedia.org/wiki/OBD-II_PIDs the Modes and PIDs are listed for the SAE J/1979 standard and the OBD2 protocol is further explained. The Formulas and PIDs can be used to calculate various different vehicle parameters. 
 
-![Image of pid](/images/engine_rpm_pid.png)
-
-
 ![Image of example](/images/example.PNG)
 
 "[gif_of_rpm](/images/rpmGif.gif)
