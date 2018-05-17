@@ -49,21 +49,23 @@ Go to __Prepare the Target Hardware__ for an in-depth documentation.
 ### Install the "OBD2 SocktCan Interface" Add-On
 After installing the matching hardware support package, the "OBD2 SocktCan Interface" Add-On/Toolbox can be installed by simply executing the OBD2_SocktCan_Interface.mltbx 
 
-![Image of toolbox](/images/toolbox.PNG)
+![Image of toolbox1](/images/toolbox_1.PNG)
 
-The installed library and all the corresponding data will can be viewed by navigating to `MATLAB -> HOME -> Add-Ons -> Manage Add-Ons`, right klick on the "OBD2 SocktCan Interface" and go to `Open Folder`
+The installed library and all the corresponding data will can be viewed by navigating to `MATLAB -> HOME -> Add-Ons -> Manage Add-Ons`, right klick on the "OBD2 SocketCan Interface" and go to `Open Folder`. The "OBD2 SocketCan Interface" can be now found in the Simulink Library Browser (sometimes a refresh is necessary  F5)
 
-![Image of toolboxFolder](/images/toolboxFolder.PNG)
-
+![Image of toolbox2](/images/toolbox_2.PNG)
 
 ### The Simulink Model
 Depending on the target hardware, the Simulink Model Configuration Parameters have to be configured appropriately.
 
 1. `MATLAB -> HOME -> New Simulink Model`
 2. `Simulink Model -> Simulation -> Model Configuration Parameters`
-3. `Model Configuration Parameters -> Solver -> Solver Type = Fixed Step, Solver = auto`
-4. `Model Configuration Parameters -> Solver -> Additional Parameters -> Fixed-step size = 0.1`
-4. `Model Configuration Parameters -> Hardware Implementation -> Hardware Board = Raspberry Pi`
+3. `Model Configuration Parameters -> Solver -> Stop time = inf`
+4. `Model Configuration Parameters -> Solver -> Solver Type = Fixed Step, Solver = auto`
+5. `Model Configuration Parameters -> Solver -> Additional Parameters -> Fixed-step size = 0.1`
+6. `Model Configuration Parameters -> Hardware Implementation -> Hardware Board = Raspberry Pi`
+
+![Image of toolbox](/images/modelConfig_1.PNG)
 
 ## Prepare the Target Hardware
 
