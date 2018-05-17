@@ -39,11 +39,14 @@ In this article: https://en.wikipedia.org/wiki/OBD-II_PIDs the Modes and PIDs ar
 If you already have SocketCan capable target hardware, install the corresponding MATLAB/Simulink Hardware Support Package.
 `MATLAB -> HOME -> Add-Ons -> Get Hardware Support Packages` (run MATLAB as Administrator when installing the packages).
 
-Possible Packages are:
+Possible Packages are (testet with Raspi and BeagleBone):
 * Simulink Support Package for Raspberry Pi Hardware
+* Embedded Coder Support Package for ARM Cortex-A Processors
 * Embedded Coder Support Package for BeagleBone Black Hardware
-* Simulink Support Package for Beagleboard Hardware
-
+* Simulink Coder Support Package for NXP FRDM-K64F Board
+* Embedded Coder Support Package for Intel SoC Devices
+* Embedded Coder Support Package for Xilinx Zynq Platform
+    
 Go to __Prepare the Target Hardware__ for an in-depth documentation.
 
 ### Install the "OBD2 SocktCan Interface" Add-On
