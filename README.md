@@ -116,11 +116,12 @@ FYI: https://github.com/linux-can/can-utils
 #### CAN bus hardware:
 Purpose: The Raspberry Pi 2/3, on its own, is not able to communicate with the vehicles can bus, therefore is is necessary to supply it with additional hardware. They are different options to do so:
 
-1. Professional, "hardened" solutions like the emPC-A/RPI3: https://www.janztec.com/embedded-pc/embedded-computer/empc-arpi3/ 
-2. Semi-Professional PiCAN2:http://skpang.co.uk/catalog/pican2-canbus-board-for-raspberry-pi-23-p-1475.html
-3. USB based 
+1. Professional, "hardened" solutions like the emPC-A/RPI3: https://www.janztec.com/embedded-pc/embedded-computer/empc-arpi3/,
+2. Professional USB CAN adapters e.g. PEAK PCAN-USB: https://www.peak-system.com/PCAN-USB.199.0.html,
+3. Semi-Professional PiCAN2: http://skpang.co.uk/catalog/pican2-canbus-board-for-raspberry-pi-23-p-1475.html,
+4. Low-End eBay modules like based on the MCP2515, a couple of projects implementing this solution can be found on the web.
 
-In this example the PiCAN2 board is used to enable CAN communication with the vehicle. It uses the Microchip MCP2515 CAN controller and a MCP2551 CAN transceiver. The board can be connected via a DB9 or a 3 way screw terminal to the vehicles OBD2 connector with e.g. an appropriate OBD2->DB9 cable.
+In this example the PiCAN2 board is used to enable CAN communication with the vehicle. It uses the Microchip MCP2515 CAN controller and a MCP2551 CAN transceiver. The board can be connected via a DB9 terminal to the vehicles OBD2 connector with e.g. an appropriate OBD2->DB9 cable. If the DB9 terminal is used, three solder bridges have to be soldered, depending on the vehicles OBD2 port (refere to the documentation!).
 
 ![Image of PiCan](/images/PiCAN2.PNG)
 
@@ -128,7 +129,7 @@ Image source and supplier: http://skpang.co.uk/catalog/pican2-canbus-board-for-r
 
 Learn more about the standard and the connector: https://en.wikipedia.org/wiki/On-board_diagnostics
 
-It is important to match the bitrate or baudrate of your hardware to the bitrate of your vehicle.
+Additionally is important to match the bitrate or baudrate of your hardware to the bitrate of your vehicle.
 This should be done in the `/boot/config.txt` file:
 
 Just add the following lines at the end of the File using:
@@ -153,7 +154,12 @@ Additionally, to bring up the can interface with every reboot, the following lin
 
 `bitrate 500000`
 
-The bitrate can be changes to match the CAN bus bitrate of your vehicle. They are usualy 125, 250 or 500 kbits/s
+The bitrate can be changes to match the CAN bus bitrate of your vehicle. They are usualy 125, 250 or 500 kbits/s.
+
+#### Test the Target Hardware:
+Purpose: Lets see if 
+
+
 
 
 
