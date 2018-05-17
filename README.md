@@ -1,6 +1,6 @@
 # OBD2-SocktCan-Interface
 
-This MATLAB/Simulink library/Add-On provides an OBD2 (On-board diagnostics) block for basic communication, data logging and vehicle diagnostics.
+This MATLAB/Simulink Add-On/Toolbox provides an OBD2 (On-board diagnostics) block for basic communication, data logging and vehicle diagnostics.
 
 The block, included in this library, is intended to be used with SocketCan on a Linux target. For example, a RaspberryPi or a BeagleBone Black. 
 
@@ -35,33 +35,66 @@ In this article: https://en.wikipedia.org/wiki/OBD-II_PIDs the Modes and PIDs ar
 9. **Raw_Date[8]**: the raw can message data vector,
 10. **New_Message_Trigger**: this value is set to 1 if a new message has arrived in the current time step.
 
-# How to:
-### Prepare your Hardware
+## MATLAB/Simulink Implementation
+If you already have SocketCan capable target hardware, install the corresponding MATLAB/Simulink Hardware Support Package.
+`MATLAB -> HOME -> Add-Ons -> Get Hardware Support Packages` (run MATLAB as Administrator when installing the packages).
+
+Possible Packages are:
+* Simulink Support Package for Raspberry Pi Hardware
+* Embedded Coder Support Package for BeagleBone Black Hardware
+* Simulink Support Package for Beagleboard Hardware
+
+Go to __Prepare the Target Hardware__ for an in-depth documentation.
+
+### Install the "OBD2 SocktCan Interface" Add-On
+After installing the matching hardware support package, the "OBD2 SocktCan Interface" Add-On/Toolbox can be installed by simply executing the OBD2_SocktCan_Interface.mltbx 
+
+![Image of toolbox](/images/toolbox.PNG)
+
+The installed library and all the corresponding data will can be viewed by navigating to `MATLAB -> HOME -> Add-Ons -> Manage Add-Ons`, right klick on the "OBD2 SocktCan Interface" and go to `Open Folder`
+
+![Image of toolboxFolder](/images/toolboxFolder.PNG)
+
+
+### The Simulink Model
+Depending on the target hardware, the Simulink Model Configuration Parameters have to be configured appropriately.
+
+1. `MATLAB -> HOME -> New Simulink Model`
+2. `Simulink Model -> Simulation -> Model Configuration Parameters`
+3. `Model Configuration Parameters -> Solver -> Solver Type = Fixed Step, Solver = auto`
+4. `Model Configuration Parameters -> Solver -> Additional Parameters -> Fixed-step size = 0.1`
+4. `Model Configuration Parameters -> Hardware Implementation -> Hardware Board = Raspberry Pi`
+
+## Prepare the Target Hardware
 
 This example is for the Raspberry Pi 2.
 
 #### 1. Install the Simulink Support Package for Raspberry Pi Hardware
+Purpose: Be able to prepare a bootable SD-Card and deploy Simulink models to the target hardware with MATLAB.
+
 Go to MATLAB -> HOME -> Add-Ons -> Get Hardware Support Packages
 
 ![Image of example](/images/matlab_1.PNG)
 
-Install the following support packages for 
+Install the following support packages: 
 * MATLAB Support Package for Raspberry Pi Hardware
 * Simulink Support Package for Raspberry Pi Hardware
 
 ![Image of example](/images/matlab_2.PNG)
 
-Follow the instructions given by MATLAB to prepare your SD-Card
+Follow the instructions given by MATLAB to prepare a bootable SD-Card. An Rasbian image will be written to your Card.
 
 ![Image of example](/images/matlab_4.PNG)
 
-You can always put up the setup for the SD-Card using:
+You can always pull up the setup for the SD-Card typing:
 
 > `>> targetupdater`
 
 in the MATLAB Command Window.
 
-#### Connect to your hardware:
+#### 2. Connect to the Hardware
+Purpose: Update the Rasbian operating system and install can bus utilities and drivers. 
+
 1. Connect the Raspi to your network and access it remotely using:
 * putty.exe
 
@@ -83,13 +116,14 @@ If you have encountered problems the documentation is always a good place to go:
 
 https://www.mathworks.com/help/supportpkg/raspberrypiio/index.html
 
-To have enough disk space on the Raspi for the Simulink applications, the file system has to be expanded:
+#### 3. Expand Filesystem
+Purpose: having enough disk space on the SD-Card of your Raspi, the file system has to be expanded:
 
 In the Command Shell type:
 
 > `$ sudo raspi-config`
 
-this command opens up a dialog. Go to Advanced Options -> Expand Filesystem and reboot your Raspi.
+This command opens up a dialog. Go to Advanced Options -> Expand Filesystem and reboot your Raspi.
 By the way, changing the default 
 * username: pi 
 
@@ -98,26 +132,33 @@ and the default
 
 is always a great idea.
 
-#### Update your hardware:
-
+#### 4. Update your Hardware
 Updating you Linux distro can solve a lot of problems.
 
 > `$ sudo apt-get update`
 
-#### Install can-utils:
+#### 5. Install can-utils
 > `$ sudo apt-get install can-utils`
 
 FYI: https://github.com/linux-can/can-utils
 
-#### CAN bus hardware:
+#### 6. Choose the CAN bus Hardware
+Purpose: The Raspberry Pi 2/3, on its own, is not able to communicate with the vehicles can bus, therefore is is necessary to supply it with additional hardware. Different options are available:
 
-In this example the PiCAN2 board is used to enable CAN communication with the vehicle.
+1. Professional, "hardened" solutions like the emPC-A/RPI3: https://www.janztec.com/embedded-pc/embedded-computer/empc-arpi3/,
+2. Professional USB CAN adapters e.g. PEAK PCAN-USB: https://www.peak-system.com/PCAN-USB.199.0.html,
+3. Semi-Professional PiCAN2: http://skpang.co.uk/catalog/pican2-canbus-board-for-raspberry-pi-23-p-1475.html,
+4. Low-End eBay modules like based on the MCP2515, a couple of projects implementing this solution can be found on the web.
+
+In this example the PiCAN2 board is used to enable CAN communication with the vehicle. It uses the Microchip MCP2515 CAN controller and a MCP2551 CAN transceiver. The board can be connected via a DB9 terminal to the vehicles OBD2 connector with e.g. an appropriate OBD2->DB9 cable. If the DB9 terminal is used, three solder bridges have to be soldered, depending on the vehicles OBD2 port (refere to the documentation!).
 
 ![Image of PiCan](/images/PiCAN2.PNG)
 
 Image source and supplier: http://skpang.co.uk/catalog/pican2-canbus-board-for-raspberry-pi-23-p-1475.html
 
-It is very important to match the bitrate or baudrate of your hardware to the bitrate of your vehicle.
+Learn more about the standard and the connector: https://en.wikipedia.org/wiki/On-board_diagnostics
+
+Additionally is important to match the bitrate or baudrate of your hardware to the bitrate of your vehicle.
 This should be done in the `/boot/config.txt` file:
 
 Just add the following lines at the end of the File using:
@@ -126,23 +167,45 @@ Just add the following lines at the end of the File using:
 
 and then add 
 
-`dtparam=spi=on`
-
-`dtoverlay=mcp2515-can0,oscillator=16000000,interrupt=25`
-
-`dtoverlay=spi-bcm2835-overlay`
+```
+dtparam=spi=on
+dtoverlay=mcp2515-can0,oscillator=16000000,interrupt=25
+dtoverlay=spi-bcm2835-overlay
+```
 
 Additionally, to bring up the can interface with every reboot, the following lines have to be added to `/etc/network/interfaces`
 
 > `$ sudo nano /etc/network/interfaces`
 
-`allow-hotplug can0`
+```
+auto can0
+iface can0 inet manual
+  pre-up /sbin/ip link set $IFACE type can bitrate 500000 triple-sampling on
+  up /sbin/ifconfig $IFACE up
+  down /sbin/ifconfig $IFACE down
+```
 
-`iface can0 can static`
 
-`bitrate 500000`
+The bitrate can be changes to match the CAN bus bitrate of your vehicle. They are usualy 125, 250 or 500 kbits/s.
 
-The bitrate should be changes to match the CAN bus bitrate of your vehicle.
+#### 7. Test the Target Hardware
+Purpose: Let's see if everything went well.
+
+After reboot, test if the interface for CAN communication is online. Use the Raspberry shell and type:
+
+> `$ ifconfig can`
+
+The response should look something like this:
+
+![Image of response](/images/responseCan0.PNG)
+
+If can-utils was installed succsessfully, the command 
+> `$ candump can0` 
+
+will show CAN bus traffic, if there is any. For a full list of available commands refer to https://github.com/linux-can/can-utils.
+
+![Image of can_traffic](/images/canTraffic.PNG)
+
 
 
 
