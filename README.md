@@ -67,6 +67,24 @@ Depending on the target hardware, the Simulink Model Configuration Parameters ha
 
 ![Image of toolbox](/images/modelConfig_1.PNG)
 
+### Multiple OBD2 PIDs/Multiple Vehicle Parameter
+Requesting multiple messages in one Model can be useful to analyze relationships between different vehicle parameters and driving behaviors. Although this block is not strictly designed to do so, it is still possible by changing the input of the OBD2_PID Input Port during runtime, as shown in Example_MultiPID.slx.
+
+![Image of toolbox](/images/multiLogModel_1.PNG)
+
+Basically, the steps are:
+1. Use an initial PID.
+2. Wait until the response arrives.
+3. Change the PID after the new PID has arrived.
+4. Wait until the response for the new PID arrives.
+5. etc.
+
+This will obviously reduce the resolution of the incoming signals. To counter this effect, the sample time of the model can be reduced.
+
+The result for e.g. three measurements can look like this:
+
+![Image of toolbox](/images/MultiLog.PNG)
+
 ## Prepare the Target Hardware
 
 This example is for the Raspberry Pi 2.
