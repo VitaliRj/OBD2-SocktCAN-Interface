@@ -139,26 +139,23 @@ Just add the following lines at the end of the File using:
 
 and then add 
 
-`dtparam=spi=on`
-
-`dtoverlay=mcp2515-can0,oscillator=16000000,interrupt=25`
-
-`dtoverlay=spi-bcm2835-overlay`
+```
+dtparam=spi=on
+dtoverlay=mcp2515-can0,oscillator=16000000,interrupt=25
+dtoverlay=spi-bcm2835-overlay
+```
 
 Additionally, to bring up the can interface with every reboot, the following lines have to be added to `/etc/network/interfaces`
 
 > `$ sudo nano /etc/network/interfaces`
 
-`auto can0`
-
-`iface can0 inet manual`
-
-> `pre-up /sbin/ip link set $IFACE type can bitrate 500000 triple-sampling on`
-
-> `up /sbin/ifconfig $IFACE up`
-
-> `down /sbin/ifconfig $IFACE down`
-
+```
+auto can0
+iface can0 inet manual
+  pre-up /sbin/ip link set $IFACE type can bitrate 500000 triple-sampling on
+  up /sbin/ifconfig $IFACE up
+  down /sbin/ifconfig $IFACE down
+```
 
 
 The bitrate can be changes to match the CAN bus bitrate of your vehicle. They are usualy 125, 250 or 500 kbits/s.
@@ -180,7 +177,6 @@ If can-utils was installed succsessfully, the command
 will show CAN bus traffic, if there is any. For a full list of available commands refer to https://github.com/linux-can/can-utils.
 
 ![Image of can_traffic](/images/canTraffic.PNG)
-
 
 
 
