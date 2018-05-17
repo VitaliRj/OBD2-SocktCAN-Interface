@@ -87,7 +87,8 @@ If you have encountered problems the documentation is always a good place to go:
 
 https://www.mathworks.com/help/supportpkg/raspberrypiio/index.html
 
-To have enough disk space on the SD-Card of your Raspi, the file system has to be expanded:
+#### Expand Filesystem:
+Purpose: having enough disk space on the SD-Card of your Raspi, the file system has to be expanded:
 
 In the Command Shell type:
 
@@ -157,7 +158,22 @@ Additionally, to bring up the can interface with every reboot, the following lin
 The bitrate can be changes to match the CAN bus bitrate of your vehicle. They are usualy 125, 250 or 500 kbits/s.
 
 #### Test the Target Hardware:
-Purpose: Lets see if 
+Purpose: Let's see if everything went well.
+
+After reboot, test if the interface for CAN communication is online. Use the Raspberry shell and type:
+
+> `$ ifconfig can`
+
+The response should look something like this:
+
+![Image of response](/images/responseCan0.PNG)
+
+If can-utils was installed succsessfully, the command 
+> `$ candump can0` 
+
+will show CAN bus traffic, if there is any. For a full list of available commands refer to https://github.com/linux-can/can-utils.
+
+![Image of can_traffic](/images/canTraffic.PNG)
 
 
 
