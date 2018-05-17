@@ -2,15 +2,12 @@
 
 This MATLAB/Simulink Add-On/Toolbox provides an OBD2 (On-board diagnostics) block for basic communication, data logging and vehicle diagnostics.
 
-The block, included in this library, is intended to be used with SocketCan on a Linux target. For example, a RaspberryPi or a BeagleBone Black. 
+The block, included in this library, is intended to be used with SocketCan on a Linux target. For example, a Raspberry Pi or a BeagleBone Black. 
 
 ### For Example:
 To get e.g. the engine RPM, the "OBD2 SocketCan Interface" Block has to generate a request message and send it on to the vehicles CAN bus. To generate this request message, the appropriate OBD2/OBD-II Parameter IDs (PID) has to be provided to the input port (OBD2_PID) of the block. To show the current data (Mode 1) an additional parameter has to be provided on the OBD2_Mode input.
 
 In this article: https://en.wikipedia.org/wiki/OBD-II_PIDs the Modes and PIDs are listed for the SAE J/1979 standard and the OBD2 protocol is further explained. The Formulas and PIDs can be used to calculate various different vehicle parameters. 
-
-![Image of pid](/images/engine_rpm_pid.png)
-
 
 ![Image of example](/images/example.PNG)
 
@@ -18,52 +15,89 @@ In this article: https://en.wikipedia.org/wiki/OBD-II_PIDs the Modes and PIDs ar
 * provide an OBD-II PID and a Mode for the "OBD2_PID" and "OBD2_Mode" input port.
 * calculate the parameter you are expecting with the given formula and the appropriate output ports A, B, C and D.
 
+<img src="/images/rpmGif.gif" width="960" height="540">
+
 ### The "OBD2 SocketCan Interface"-Block
 #### Inputs:
 1. **OBD2_PID**: specific parameter ID for a vehicle status or parameter (e.g. 13 = vehicle speed),
 2. **OBD2_Mode**: they are 10 different modes for OBD2 (e.g. 1 = current data, 2 = freeze frame data etc.).
 
 #### Output:
-1. **Identifier**: The identifier of the ecu response message,
-2. **Returned_Bytes**: the number of returned data bytes,
-3. **Mode**: the mode, the response message is in (e.g. Mode 1 = current data),
-4. **A**: the first usable data byte,
-5. **B**: the second usable data byte,
-6. **C**: the third usable data byte,
-7. **D**: the fourth usable data byte,
-8. **Timestamp**: a Linux timestamp using *ioctl(s, SIOCGSTAMP, &tv)*,
-9. **Raw_Date[8]**: the raw can message data vector,
-10. **New_Message_Trigger**: this value is set to 1 if a new message has arrived in the current time step.
+1. **Identifier**: The identifier of the ecu response message
+2. **Returned_Bytes**: the number of returned data bytes
+3. **Mode**: the mode, the response message is in (e.g. Mode 41 = current data)
+4. **PID**: the OBD2 PID of the response
+5. **A**: the first usable data byte
+6. **B**: the second usable data byte
+7. **C**: the third usable data byte
+8. **D**: the fourth usable data byte
+9. **Timestamp**: a Linux timestamp using *ioctl(s, SIOCGSTAMP, &tv)*
+10. **Raw_Date[8]**: the raw can message data vector
+11. **New_Message_Trigger**: this value is set to 1 if a new message has arrived in the current time step
 
 ## MATLAB/Simulink Implementation
 If you already have SocketCan capable target hardware, install the corresponding MATLAB/Simulink Hardware Support Package.
 `MATLAB -> HOME -> Add-Ons -> Get Hardware Support Packages` (run MATLAB as Administrator when installing the packages).
 
-Possible Packages are:
+Possible Packages are (testet with Raspi and BeagleBone):
 * Simulink Support Package for Raspberry Pi Hardware
+* Embedded Coder Support Package for ARM Cortex-A Processors
 * Embedded Coder Support Package for BeagleBone Black Hardware
-* Simulink Support Package for Beagleboard Hardware
-
+* Simulink Coder Support Package for NXP FRDM-K64F Board
+* Embedded Coder Support Package for Intel SoC Devices
+* Embedded Coder Support Package for Xilinx Zynq Platform
+    
 Go to __Prepare the Target Hardware__ for an in-depth documentation.
 
 ### Install the "OBD2 SocktCan Interface" Add-On
 After installing the matching hardware support package, the "OBD2 SocktCan Interface" Add-On/Toolbox can be installed by simply executing the OBD2_SocktCan_Interface.mltbx 
 
-![Image of toolbox](/images/toolbox.PNG)
+![Image of toolbox1](/images/toolbox_1.PNG)
 
-The installed library and all the corresponding data will can be viewed by navigating to `MATLAB -> HOME -> Add-Ons -> Manage Add-Ons`, right klick on the "OBD2 SocktCan Interface" and go to `Open Folder`
+The installed library and all the corresponding data will can be viewed by navigating to `MATLAB -> HOME -> Add-Ons -> Manage Add-Ons`, right klick on the "OBD2 SocketCan Interface" and go to `Open Folder`. The "OBD2 SocketCan Interface" can be now found in the Simulink Library Browser (sometimes a refresh is necessary  F5)
 
-![Image of toolboxFolder](/images/toolboxFolder.PNG)
-
+![Image of toolbox2](/images/toolbox_2.PNG)
 
 ### The Simulink Model
 Depending on the target hardware, the Simulink Model Configuration Parameters have to be configured appropriately.
 
 1. `MATLAB -> HOME -> New Simulink Model`
 2. `Simulink Model -> Simulation -> Model Configuration Parameters`
-3. `Model Configuration Parameters -> Solver -> Solver Type = Fixed Step, Solver = auto`
-4. `Model Configuration Parameters -> Solver -> Additional Parameters -> Fixed-step size = 0.1`
-4. `Model Configuration Parameters -> Hardware Implementation -> Hardware Board = Raspberry Pi`
+3. `Model Configuration Parameters -> Solver -> Stop time = inf`
+4. `Model Configuration Parameters -> Solver -> Solver Type = Fixed Step, Solver = auto`
+5. `Model Configuration Parameters -> Solver -> Additional Parameters -> Fixed-step size = 0.1`
+6. `Model Configuration Parameters -> Hardware Implementation -> Hardware Board = Raspberry Pi`
+
+![Image of toolbox](/images/modelConfig_1.PNG)
+
+### Multiple OBD2 Vehicle Parameter
+Requesting multiple messages in one Model can be useful to analyze relationships between different vehicle parameters and driving behaviors. Although this block is not strictly designed to do so, it is still possible by changing the input of the OBD2_PID Input Port during runtime, as shown in Example_MultiPID.slx.
+
+![Image of toolbox](/images/multiLogModel_1.PNG)
+
+Basically, the steps are:
+1. Use an initial PID.
+2. Wait until the response arrives.
+3. Change the PID after the new PID has arrived.
+4. Wait until the response for the new PID arrives.
+5. etc.
+
+This will obviously reduce the resolution of the incoming signals. To counter this effect, the sample time of the model can be reduced.
+
+The result for e.g. three measurements can look like this:
+
+![Image of toolbox](/images/MultiLog.PNG)
+
+
+### Deploy the Model
+There are two main main options to run the model on a possible target hardware/embedded system. 
+
+1. Deploy it to the Hardware -> the model runs on the target without a link to the host-pc,
+![Image of toolbox](/images/deployToHardware.PNG)
+2. Run it in External Mode -> the model runs on the target and communicates with the host-pc.
+![Image of toolbox](/images/runInExternalMode.PNG)
+
+Please refer to the MATLAB documentation for further information: https://de.mathworks.com/help/supportpkg/armcortexa/ug/external-mode.html
 
 ## Prepare the Target Hardware
 
@@ -204,7 +238,7 @@ If can-utils was installed succsessfully, the command
 
 will show CAN bus traffic, if there is any. For a full list of available commands refer to https://github.com/linux-can/can-utils.
 
-![Image of can_traffic](/images/canTraffic.PNG)
+![Image of can_traffic](/images/candump.PNG)
 
 
 
