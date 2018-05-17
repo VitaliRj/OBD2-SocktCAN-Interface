@@ -1,6 +1,6 @@
 # OBD2-SocktCan-Interface
 
-This MATLAB/Simulink library/Add-On provides an OBD2 (On-board diagnostics) block for basic communication, data logging and vehicle diagnostics.
+This MATLAB/Simulink Add-On/Toolbox provides an OBD2 (On-board diagnostics) block for basic communication, data logging and vehicle diagnostics.
 
 The block, included in this library, is intended to be used with SocketCan on a Linux target. For example, a RaspberryPi or a BeagleBone Black. 
 
@@ -35,8 +35,31 @@ In this article: https://en.wikipedia.org/wiki/OBD-II_PIDs the Modes and PIDs ar
 9. **Raw_Date[8]**: the raw can message data vector,
 10. **New_Message_Trigger**: this value is set to 1 if a new message has arrived in the current time step.
 
-# How to:
-### Prepare your Target Hardware
+## MATLAB/Simulink Implementation
+If you already have SocketCan capable target hardware, install the corresponding MATLAB/Simulink Hardware Support Package.
+`MATLAB -> HOME -> Add-Ons -> Get Hardware Support Packages` (run MATLAB as Administrator when installing the packages).
+
+Possible Packages are:
+* Simulink Support Package for Raspberry Pi Hardware
+* Embedded Coder Support Package for BeagleBone Black Hardware
+* Simulink Support Package for Beagleboard Hardware
+
+Go to __Prepare the Target Hardware__ for an in-depth documentation.
+
+### Install the "OBD2 SocktCan Interface" Add-On
+After installing the matching hardware support package, the "OBD2 SocktCan Interface" Add-On/Toolbox can be installed by simply executing the OBD2_SocktCan_Interface.mltbx 
+
+![Image of toolbox](/images/toolbox.PNG)
+
+The installed library and corresponding data will can be viewed by going to `MATLAB -> HOME -> Add-Ons -> Manage Add-Ons`, right klick on the "OBD2 SocktCan Interface" and go to `Open Folder`
+
+![Image of toolboxFolder](/images/toolboxFolder.PNG)
+
+
+### The Simulink Model
+
+
+## Prepare the Target Hardware
 
 This example is for the Raspberry Pi 2.
 
@@ -63,7 +86,7 @@ You can always pull up the setup for the SD-Card typing:
 
 in the MATLAB Command Window.
 
-#### Connect to your hardware:
+#### 2. Connect to the Hardware
 Purpose: Update the Rasbian operating system and install can bus utilities and drivers. 
 
 1. Connect the Raspi to your network and access it remotely using:
@@ -87,7 +110,7 @@ If you have encountered problems the documentation is always a good place to go:
 
 https://www.mathworks.com/help/supportpkg/raspberrypiio/index.html
 
-#### Expand Filesystem:
+#### 3. Expand Filesystem
 Purpose: having enough disk space on the SD-Card of your Raspi, the file system has to be expanded:
 
 In the Command Shell type:
@@ -103,18 +126,17 @@ and the default
 
 is always a great idea.
 
-#### Update your hardware:
-
+#### 4. Update your Hardware
 Updating you Linux distro can solve a lot of problems.
 
 > `$ sudo apt-get update`
 
-#### Install can-utils:
+#### 5. Install can-utils
 > `$ sudo apt-get install can-utils`
 
 FYI: https://github.com/linux-can/can-utils
 
-#### CAN bus hardware:
+#### 6. CAN bus Hardware
 Purpose: The Raspberry Pi 2/3, on its own, is not able to communicate with the vehicles can bus, therefore is is necessary to supply it with additional hardware. They are different options to do so:
 
 1. Professional, "hardened" solutions like the emPC-A/RPI3: https://www.janztec.com/embedded-pc/embedded-computer/empc-arpi3/,
@@ -160,7 +182,7 @@ iface can0 inet manual
 
 The bitrate can be changes to match the CAN bus bitrate of your vehicle. They are usualy 125, 250 or 500 kbits/s.
 
-#### Test the Target Hardware:
+#### 7. Test the Target Hardware
 Purpose: Let's see if everything went well.
 
 After reboot, test if the interface for CAN communication is online. Use the Raspberry shell and type:
