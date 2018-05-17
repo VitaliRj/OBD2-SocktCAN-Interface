@@ -51,13 +51,19 @@ After installing the matching hardware support package, the "OBD2 SocktCan Inter
 
 ![Image of toolbox](/images/toolbox.PNG)
 
-The installed library and corresponding data will can be viewed by going to `MATLAB -> HOME -> Add-Ons -> Manage Add-Ons`, right klick on the "OBD2 SocktCan Interface" and go to `Open Folder`
+The installed library and all the corresponding data will can be viewed by navigating to `MATLAB -> HOME -> Add-Ons -> Manage Add-Ons`, right klick on the "OBD2 SocktCan Interface" and go to `Open Folder`
 
 ![Image of toolboxFolder](/images/toolboxFolder.PNG)
 
 
 ### The Simulink Model
+Depending on the target hardware, the Simulink Model Configuration Parameters have to be configured appropriately.
 
+1. `MATLAB -> HOME -> New Simulink Model`
+2. `Simulink Model -> Simulation -> Model Configuration Parameters`
+3. `Model Configuration Parameters -> Solver -> Solver Type = Fixed Step, Solver = auto`
+4. `Model Configuration Parameters -> Solver -> Additional Parameters -> Fixed-step size = 0.1`
+4. `Model Configuration Parameters -> Hardware Implementation -> Hardware Board = Raspberry Pi`
 
 ## Prepare the Target Hardware
 
@@ -136,8 +142,8 @@ Updating you Linux distro can solve a lot of problems.
 
 FYI: https://github.com/linux-can/can-utils
 
-#### 6. CAN bus Hardware
-Purpose: The Raspberry Pi 2/3, on its own, is not able to communicate with the vehicles can bus, therefore is is necessary to supply it with additional hardware. They are different options to do so:
+#### 6. Choose the CAN bus Hardware
+Purpose: The Raspberry Pi 2/3, on its own, is not able to communicate with the vehicles can bus, therefore is is necessary to supply it with additional hardware. Different options are available:
 
 1. Professional, "hardened" solutions like the emPC-A/RPI3: https://www.janztec.com/embedded-pc/embedded-computer/empc-arpi3/,
 2. Professional USB CAN adapters e.g. PEAK PCAN-USB: https://www.peak-system.com/PCAN-USB.199.0.html,
