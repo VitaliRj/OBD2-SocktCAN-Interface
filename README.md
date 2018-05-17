@@ -14,6 +14,8 @@ In this article: https://en.wikipedia.org/wiki/OBD-II_PIDs the Modes and PIDs ar
 
 ![Image of example](/images/example.PNG)
 
+"[gif_of_rpm](/images/rpmGif.gif)
+
 #### In Summary:
 * provide an OBD-II PID and a Mode for the "OBD2_PID" and "OBD2_Mode" input port.
 * calculate the parameter you are expecting with the given formula and the appropriate output ports A, B, C and D.
@@ -24,16 +26,17 @@ In this article: https://en.wikipedia.org/wiki/OBD-II_PIDs the Modes and PIDs ar
 2. **OBD2_Mode**: they are 10 different modes for OBD2 (e.g. 1 = current data, 2 = freeze frame data etc.).
 
 #### Output:
-1. **Identifier**: The identifier of the ecu response message,
-2. **Returned_Bytes**: the number of returned data bytes,
-3. **Mode**: the mode, the response message is in (e.g. Mode 1 = current data),
-4. **A**: the first usable data byte,
-5. **B**: the second usable data byte,
-6. **C**: the third usable data byte,
-7. **D**: the fourth usable data byte,
-8. **Timestamp**: a Linux timestamp using *ioctl(s, SIOCGSTAMP, &tv)*,
-9. **Raw_Date[8]**: the raw can message data vector,
-10. **New_Message_Trigger**: this value is set to 1 if a new message has arrived in the current time step.
+1. **Identifier**: The identifier of the ecu response message
+2. **Returned_Bytes**: the number of returned data bytes
+3. **Mode**: the mode, the response message is in (e.g. Mode 41 = current data)
+4. **PID**: the OBD2 PID of the response
+5. **A**: the first usable data byte
+6. **B**: the second usable data byte
+7. **C**: the third usable data byte
+8. **D**: the fourth usable data byte
+9. **Timestamp**: a Linux timestamp using *ioctl(s, SIOCGSTAMP, &tv)*
+10. **Raw_Date[8]**: the raw can message data vector
+11. **New_Message_Trigger**: this value is set to 1 if a new message has arrived in the current time step
 
 ## MATLAB/Simulink Implementation
 If you already have SocketCan capable target hardware, install the corresponding MATLAB/Simulink Hardware Support Package.
@@ -206,7 +209,7 @@ If can-utils was installed succsessfully, the command
 
 will show CAN bus traffic, if there is any. For a full list of available commands refer to https://github.com/linux-can/can-utils.
 
-![Image of can_traffic](/images/canTraffic.PNG)
+![Image of can_traffic](/images/candump.PNG)
 
 
 
