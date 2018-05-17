@@ -36,32 +36,36 @@ In this article: https://en.wikipedia.org/wiki/OBD-II_PIDs the Modes and PIDs ar
 10. **New_Message_Trigger**: this value is set to 1 if a new message has arrived in the current time step.
 
 # How to:
-### Prepare your Hardware
+### Prepare your Target Hardware
 
 This example is for the Raspberry Pi 2.
 
 #### 1. Install the Simulink Support Package for Raspberry Pi Hardware
+Purpose: Be able to prepare a bootable SD-Card and deploy Simulink models to the target hardware with MATLAB.
+
 Go to MATLAB -> HOME -> Add-Ons -> Get Hardware Support Packages
 
 ![Image of example](/images/matlab_1.PNG)
 
-Install the following support packages for 
+Install the following support packages: 
 * MATLAB Support Package for Raspberry Pi Hardware
 * Simulink Support Package for Raspberry Pi Hardware
 
 ![Image of example](/images/matlab_2.PNG)
 
-Follow the instructions given by MATLAB to prepare your SD-Card
+Follow the instructions given by MATLAB to prepare a bootable SD-Card. An Rasbian image will be written to your Card.
 
 ![Image of example](/images/matlab_4.PNG)
 
-You can always put up the setup for the SD-Card using:
+You can always pull up the setup for the SD-Card typing:
 
 > `>> targetupdater`
 
 in the MATLAB Command Window.
 
 #### Connect to your hardware:
+Purpose: Update the Rasbian operating system and install can bus utilities and drivers. 
+
 1. Connect the Raspi to your network and access it remotely using:
 * putty.exe
 
@@ -83,13 +87,13 @@ If you have encountered problems the documentation is always a good place to go:
 
 https://www.mathworks.com/help/supportpkg/raspberrypiio/index.html
 
-To have enough disk space on the Raspi for the Simulink applications, the file system has to be expanded:
+To have enough disk space on the SD-Card of your Raspi, the file system has to be expanded:
 
 In the Command Shell type:
 
 > `$ sudo raspi-config`
 
-this command opens up a dialog. Go to Advanced Options -> Expand Filesystem and reboot your Raspi.
+This command opens up a dialog. Go to Advanced Options -> Expand Filesystem and reboot your Raspi.
 By the way, changing the default 
 * username: pi 
 
@@ -110,14 +114,21 @@ Updating you Linux distro can solve a lot of problems.
 FYI: https://github.com/linux-can/can-utils
 
 #### CAN bus hardware:
+Purpose: The Raspberry Pi 2/3, on its own, is not able to communicate with the vehicles can bus, therefore is is necessary to supply it with additional hardware. They are different options to do so:
 
-In this example the PiCAN2 board is used to enable CAN communication with the vehicle.
+1. Professional, "hardened" solutions like the emPC-A/RPI3: https://www.janztec.com/embedded-pc/embedded-computer/empc-arpi3/ 
+2. Semi-Professional PiCAN2:http://skpang.co.uk/catalog/pican2-canbus-board-for-raspberry-pi-23-p-1475.html
+3. USB based 
+
+In this example the PiCAN2 board is used to enable CAN communication with the vehicle. It uses the Microchip MCP2515 CAN controller and a MCP2551 CAN transceiver. The board can be connected via a DB9 or a 3 way screw terminal to the vehicles OBD2 connector with e.g. an appropriate OBD2->DB9 cable.
 
 ![Image of PiCan](/images/PiCAN2.PNG)
 
 Image source and supplier: http://skpang.co.uk/catalog/pican2-canbus-board-for-raspberry-pi-23-p-1475.html
 
-It is very important to match the bitrate or baudrate of your hardware to the bitrate of your vehicle.
+Learn more about the standard and the connector: https://en.wikipedia.org/wiki/On-board_diagnostics
+
+It is important to match the bitrate or baudrate of your hardware to the bitrate of your vehicle.
 This should be done in the `/boot/config.txt` file:
 
 Just add the following lines at the end of the File using:
@@ -142,7 +153,7 @@ Additionally, to bring up the can interface with every reboot, the following lin
 
 `bitrate 500000`
 
-The bitrate should be changes to match the CAN bus bitrate of your vehicle.
+The bitrate can be changes to match the CAN bus bitrate of your vehicle. They are usualy 125, 250 or 500 kbits/s
 
 
 
