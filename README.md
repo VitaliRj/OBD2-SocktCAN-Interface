@@ -149,11 +149,17 @@ Additionally, to bring up the can interface with every reboot, the following lin
 
 > `$ sudo nano /etc/network/interfaces`
 
-`allow-hotplug can0`
+`auto can0`
 
-`iface can0 can static`
+`iface can0 inet manual`
 
-`bitrate 500000`
+> `pre-up /sbin/ip link set $IFACE type can bitrate 500000 triple-sampling on`
+
+> `up /sbin/ifconfig $IFACE up`
+
+> `down /sbin/ifconfig $IFACE down`
+
+
 
 The bitrate can be changes to match the CAN bus bitrate of your vehicle. They are usualy 125, 250 or 500 kbits/s.
 
