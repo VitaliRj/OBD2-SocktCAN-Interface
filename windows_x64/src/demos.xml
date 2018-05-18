@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<demos>
+    <name>My Sample</name>
+    <type>toolbox</type>
+    <icon>HelpIcon.DEMOS</icon>
+    <description>To Do.</description>
+    <website><a href="https://github.com/VitaliRj">Link to your Web site</a></website>
+
+    <demosection>
+        <label>First Section</label>
+        <demoitem>
+            <label>Example</label>
+            <type>M-file</type>
+            <source>Example</source>
+        </demoitem>
+    </demosection>
+
+</demos>
