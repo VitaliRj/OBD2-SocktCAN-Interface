@@ -54,7 +54,11 @@ After installing the matching hardware support package, the "OBD2 SocktCan Inter
 
 ![Image of toolbox1](/images/toolbox_1.PNG)
 
-The installed library and all the corresponding data will can be viewed by navigating to `MATLAB -> HOME -> Add-Ons -> Manage Add-Ons`, right klick on the "OBD2 SocketCan Interface" and go to `Open Folder`. The "OBD2 SocketCan Interface" can be now found in the Simulink Library Browser (sometimes a refresh is necessary  F5)
+The installed library and all the corresponding data will can be viewed by navigating to `MATLAB -> HOME -> Add-Ons -> Manage Add-Ons`, right klick on the "OBD2 SocketCan Interface" and go to `Open Folder`.
+
+Usualy MATLAB installs the Add-On to:  `C:\Users\<USERNAME>\Documents\MATLAB\Add-Ons\Toolboxes`
+
+The "OBD2 SocketCan Interface" can be now found in the Simulink Library Browser (sometimes a refresh is necessary  F5)
 
 ![Image of toolbox2](/images/toolbox_2.PNG)
 
