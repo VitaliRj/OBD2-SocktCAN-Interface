@@ -39,11 +39,14 @@ In this article: https://en.wikipedia.org/wiki/OBD-II_PIDs the Modes and PIDs ar
 If you already have SocketCan capable target hardware, install the corresponding MATLAB/Simulink Hardware Support Package.
 `MATLAB -> HOME -> Add-Ons -> Get Hardware Support Packages` (run MATLAB as Administrator when installing the packages).
 
-Possible Packages are:
+Possible Packages are (testet with Raspi and BeagleBone):
 * Simulink Support Package for Raspberry Pi Hardware
+* Embedded Coder Support Package for ARM Cortex-A Processors
 * Embedded Coder Support Package for BeagleBone Black Hardware
-* Simulink Support Package for Beagleboard Hardware
-
+* Simulink Coder Support Package for NXP FRDM-K64F Board
+* Embedded Coder Support Package for Intel SoC Devices
+* Embedded Coder Support Package for Xilinx Zynq Platform
+    
 Go to __Prepare the Target Hardware__ for an in-depth documentation.
 
 ### Install the "OBD2 SocktCan Interface" Add-On
@@ -67,7 +70,7 @@ Depending on the target hardware, the Simulink Model Configuration Parameters ha
 
 ![Image of toolbox](/images/modelConfig_1.PNG)
 
-### Multiple OBD2 PIDs/Multiple Vehicle Parameter
+### Multiple OBD2 Vehicle Parameter
 Requesting multiple messages in one Model can be useful to analyze relationships between different vehicle parameters and driving behaviors. Although this block is not strictly designed to do so, it is still possible by changing the input of the OBD2_PID Input Port during runtime, as shown in Example_MultiPID.slx.
 
 ![Image of toolbox](/images/multiLogModel_1.PNG)
@@ -84,6 +87,17 @@ This will obviously reduce the resolution of the incoming signals. To counter th
 The result for e.g. three measurements can look like this:
 
 ![Image of toolbox](/images/MultiLog.PNG)
+
+
+### Deploy the Model
+There are two main main options to run the model on a possible target hardware/embedded system. 
+
+1. Deploy it to the Hardware -> the model runs on the target without a link to the host-pc,
+![Image of toolbox](/images/deployToHardware.PNG)
+2. Run it in External Mode -> the model runs on the target and communicates with the host-pc.
+![Image of toolbox](/images/runInExternalMode.PNG)
+
+Please refer to the MATLAB documentation for further information: https://de.mathworks.com/help/supportpkg/armcortexa/ug/external-mode.html
 
 ## Prepare the Target Hardware
 
