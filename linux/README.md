@@ -1,4 +1,4 @@
-# You have to compile it yourself
+# You have to Compile it Yourself
 
 Follow these steps:
 
