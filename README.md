@@ -86,7 +86,7 @@ This will obviously reduce the resolution of the incoming signals. To counter th
 
 The result for e.g. three measurements can look like this:
 
-![Image of toolbox](/images/MultiLog.PNG)
+![Image of toolbox](/images/multiLog_1.PNG)
 
 
 ### Deploy the Model
@@ -99,9 +99,10 @@ There are two main main options to run the model on a possible target hardware/e
 
 Please refer to the MATLAB documentation for further information: https://de.mathworks.com/help/supportpkg/armcortexa/ug/external-mode.html
 
-## Prepare the Target Hardware
 
-This example is for the Raspberry Pi 2.
+# Example for the Raspberry Pi 2.
+
+This will also work with the Raspberrys Pi 3. With MATLAB 2018a the ZERO is supported as well.
 
 #### 1. Install the Simulink Support Package for Raspberry Pi Hardware
 Purpose: Be able to prepare a bootable SD-Card and deploy Simulink models to the target hardware with MATLAB.
@@ -116,9 +117,11 @@ Install the following support packages:
 
 ![Image of example](/images/matlab_2.PNG)
 
-Follow the instructions given by MATLAB to prepare a bootable SD-Card. An Rasbian image will be written to your Card.
+Follow the instructions given by MATLAB to prepare a bootable SD-Card. An Rasbian image will be written to your Card. 
 
-![Image of example](/images/matlab_4.PNG)
+If you already have an SD-Card with an existing image, MATLAB is able to modify this image to deploy Simulink model. Just follow the instructions.
+
+![Image of example](/images/matlabCustomizeImage.PNG)
 
 You can always pull up the setup for the SD-Card typing:
 
@@ -218,7 +221,6 @@ iface can0 inet manual
   up /sbin/ifconfig $IFACE up
   down /sbin/ifconfig $IFACE down
 ```
-
 
 The bitrate can be changes to match the CAN bus bitrate of your vehicle. They are usualy 125, 250 or 500 kbits/s.
 
