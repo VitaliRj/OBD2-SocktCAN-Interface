@@ -1,8 +1,8 @@
 # OBD2-SocktCan-Interface
 
-This MATLAB/Simulink Add-On/Toolbox provides an OBD2 (On-board diagnostics) block for basic communication, data logging and vehicle diagnostics.
+This __MATLAB/Simulink__ Add-On/Toolbox provides an __OBD2__ (On-board diagnostics) block for basic communication, data logging and vehicle diagnostics.
 
-The block, included in this library, is intended to be used with SocketCan on a Linux target. For example, a Raspberry Pi or a BeagleBone Black. 
+The block, included in this library, is intended to be used with SocketCan on a Linux target. For example, a __Raspberry Pi__ or a BeagleBone Black. 
 
 ### For Example:
 To get e.g. the engine RPM, the "OBD2 SocketCan Interface" Block has to generate a request message and send it on to the vehicles CAN bus. To generate this request message, the appropriate OBD2/OBD-II Parameter IDs (PID) has to be provided to the input port (OBD2_PID) of the block. To show the current data (Mode 1) an additional parameter has to be provided on the OBD2_Mode input.
@@ -102,7 +102,11 @@ Please refer to the MATLAB documentation for further information: https://de.mat
 
 # Example for the Raspberry Pi 2.
 
-This will also work with the Raspberrys Pi 3. With MATLAB 2018a the ZERO is supported as well.
+This will also work with the Raspberry Pi 3. With MATLAB 2018a the ZERO is supported as well. 
+
+* Basic knowledge about the Linux operating system is recommended for this example. If you are totally new to this subject, https://www.raspberrypi.org/documentation/ is good place to go.
+
+* If you are new to the MATLAB Support Package topic, this is for you: https://www.mathworks.com/discovery/raspberry-pi-programming-matlab-simulink.html
 
 #### 1. Install the Simulink Support Package for Raspberry Pi Hardware
 Purpose: Be able to prepare a bootable SD-Card and deploy Simulink models to the target hardware with MATLAB.
@@ -119,7 +123,9 @@ Install the following support packages:
 
 Follow the instructions given by MATLAB to prepare a bootable SD-Card. An Rasbian image will be written to your Card. 
 
-If you already have an SD-Card with an existing image, MATLAB is able to modify this image to deploy Simulink model. Just follow the instructions.
+![Image of example](/images/matlab_4.PNG)
+
+If you already have a SD-Card with an existing image, MATLAB is able to modify this image to deploy Simulink model. Just follow the instructions.
 
 ![Image of example](/images/matlabCustomizeImage.PNG)
 
@@ -133,11 +139,11 @@ in the MATLAB Command Window.
 Purpose: Update the Rasbian operating system and install can bus utilities and drivers. 
 
 1. Connect the Raspi to your network and access it remotely using:
-* putty.exe
+* PuTTY: http://www.chiark.greenend.org.uk/~sgtatham/putty/
 
-or
+or using
 
-* using MATLAB:
+* MATLAB:
 
 type:
 
@@ -179,7 +185,7 @@ Updating you Linux distro can solve a lot of problems.
 
 FYI: https://github.com/linux-can/can-utils
 
-#### 6. Choose the CAN bus Hardware
+#### 6. Choose a CAN bus Hardware
 Purpose: The Raspberry Pi 2/3, on its own, is not able to communicate with the vehicles can bus, therefore is is necessary to supply it with additional hardware. Different options are available:
 
 1. Professional, "hardened" solutions like the emPC-A/RPI3: https://www.janztec.com/embedded-pc/embedded-computer/empc-arpi3/,
@@ -242,6 +248,5 @@ will show CAN bus traffic, if there is any. For a full list of available command
 
 ![Image of can_traffic](/images/candump.PNG)
 
-
-
-
+The Raspberry Pi is now ready to be used with MATLAB/Simulink and the OBD2-SocktCan-Interface Toolbox.
+ 
