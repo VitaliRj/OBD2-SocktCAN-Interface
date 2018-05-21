@@ -23,7 +23,7 @@ In this article: https://en.wikipedia.org/wiki/OBD-II_PIDs the Modes and PIDs ar
 2. **OBD2_Mode**: they are 10 different modes for OBD2 (e.g. 1 = current data, 2 = freeze frame data etc.).
 
 #### Output:
-1. **Identifier**: The identifier of the ecu response message
+1. **Identifier**: the identifier of the ecu response message
 2. **Returned_Bytes**: the number of returned data bytes
 3. **Mode**: the mode, the response message is in (e.g. Mode 41 = current data)
 4. **PID**: the OBD2 PID of the response
