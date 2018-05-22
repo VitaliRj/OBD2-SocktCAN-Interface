@@ -2,10 +2,10 @@
 
 This __MATLAB/Simulink__ Add-On/Toolbox provides an __OBD2__ (On-board diagnostics) block for basic communication, data logging and vehicle diagnostics.
 
-The block, included in this library, is intended to be used with SocketCan on a Linux target. For example, a __Raspberry Pi__ or a BeagleBone Black. 
+The block, included in this library, is intended to be used with SocketCAN on a Linux target. For example, a __Raspberry Pi__ or a BeagleBone Black. 
 
 ### For Example:
-To get e.g. the engine RPM, the "OBD2 SocketCan Interface" Block has to generate a request message and send it on to the vehicles CAN bus. To generate this request message, the appropriate OBD2/OBD-II Parameter IDs (PID) has to be provided to the input port (OBD2_PID) of the block. To show the current data (Mode 1) an additional parameter has to be provided on the OBD2_Mode input.
+To get e.g. the engine RPM, the "OBD2 SocketCAN Interface" Block has to generate a request message and send it on to the vehicles CAN bus. To generate this request message, the appropriate OBD2/OBD-II Parameter IDs (PID) has to be provided to the input port (OBD2_PID) of the block. To show the current data (Mode 1) an additional parameter has to be provided on the OBD2_Mode input.
 
 In this article: https://en.wikipedia.org/wiki/OBD-II_PIDs the Modes and PIDs are listed for the SAE J/1979 standard and the OBD2 protocol is further explained. The Formulas and PIDs can be used to calculate various different vehicle parameters. 
 
@@ -18,7 +18,7 @@ File -> [example.slx](/Examples/example.slx).
 
 <img src="/images/rpmGif.gif" width="960" height="540">
 
-### The "OBD2 SocketCan Interface"-Block
+### The "OBD2 SocketCAN Interface"-Block
 #### Inputs:
 1. **OBD2_PID**: specific parameter ID for a vehicle status or parameter (e.g. 13 = vehicle speed),
 2. **OBD2_Mode**: they are 10 different modes for OBD2 (e.g. 1 = current data, 2 = freeze frame data etc.).
@@ -37,7 +37,7 @@ File -> [example.slx](/Examples/example.slx).
 11. **New_Message_Trigger**: this value is set to 1 if a new message has arrived in the current time step
 
 ## MATLAB/Simulink Implementation
-If you already have SocketCan capable target hardware, install the corresponding MATLAB/Simulink Hardware Support Package.
+If you already have SocketCAN capable target hardware, install the corresponding MATLAB/Simulink Hardware Support Package.
 `MATLAB -> HOME -> Add-Ons -> Get Hardware Support Packages` (run MATLAB as Administrator when installing the packages).
 
 Possible Packages are (testet with Raspi and BeagleBone):
@@ -55,11 +55,11 @@ After installing the matching hardware support package, the "OBD2 SocktCan Inter
 
 ![Image of toolbox1](/images/toolbox_1.PNG)
 
-The installed library and all the corresponding data will can be viewed by navigating to `MATLAB -> HOME -> Add-Ons -> Manage Add-Ons`, right klick on the "OBD2 SocketCan Interface" and go to `Open Folder`.
+The installed library and all the corresponding data will can be viewed by navigating to `MATLAB -> HOME -> Add-Ons -> Manage Add-Ons`, right klick on the "OBD2 SocketCAN Interface" and go to `Open Folder`.
 
 Usualy MATLAB installs the Add-On to:  `C:\Users\<USERNAME>\Documents\MATLAB\Add-Ons\Toolboxes`
 
-The "OBD2 SocketCan Interface" can be now found in the Simulink Library Browser (sometimes a refresh is necessary  F5)
+The "OBD2 SocketCAN Interface" can be now found in the Simulink Library Browser (sometimes a refresh is necessary  F5)
 
 ![Image of toolbox2](/images/toolbox_2.PNG)
 
