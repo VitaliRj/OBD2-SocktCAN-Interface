@@ -1,4 +1,4 @@
-# OBD2-SocktCan-Interface
+# OBD2-SocktCAN-Interface
 
 This __MATLAB/Simulink__ Add-On/Toolbox provides an __OBD2__ (On-board diagnostics) block for basic communication, data logging and vehicle diagnostics.
 
