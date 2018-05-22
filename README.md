@@ -10,6 +10,7 @@ To get e.g. the engine RPM, the "OBD2 SocketCan Interface" Block has to generate
 In this article: https://en.wikipedia.org/wiki/OBD-II_PIDs the Modes and PIDs are listed for the SAE J/1979 standard and the OBD2 protocol is further explained. The Formulas and PIDs can be used to calculate various different vehicle parameters. 
 
 ![Image of example](/images/example.PNG)
+File -> [example.slx](/Examples/example.slx). 
 
 #### In Summary:
 * provide an OBD-II PID and a Mode for the "OBD2_PID" and "OBD2_Mode" input port.
@@ -74,8 +75,8 @@ Depending on the target hardware, the Simulink Model Configuration Parameters ha
 
 ![Image of toolbox](/images/modelConfig_1.PNG)
 
-### Multiple OBD2 Vehicle Parameter
-Requesting multiple messages in one Model can be useful to analyze relationships between different vehicle parameters and driving behaviors. Although this block is not strictly designed to do so, it is still possible by changing the input of the OBD2_PID Input Port during runtime, as shown in Example_MultiPID.slx.
+### Receive multiple OBD2 Messages
+Requesting multiple messages in one Model can be useful to analyze the relationships between different vehicle parameters and your driving behavior. Although this block is not strictly designed to do so, it is still possible by changing the input of the OBD2_PID Input Port during runtime, as shown in [Example_MultiPID.slx](/examples/Example_MultiPID.slx). 
 
 ![Image of toolbox](/images/multiLogModel_1.PNG)
 
