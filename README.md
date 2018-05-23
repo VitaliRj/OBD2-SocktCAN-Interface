@@ -4,6 +4,8 @@ This __MATLAB/Simulink__ Add-On/Toolbox provides an __OBD2__ (On-board diagnosti
 
 The block, included in this library, is intended to be used with SocketCAN on a Linux target. For example, a __Raspberry Pi__ or a BeagleBone Black. 
 
+![Image of hoitworks](/images/howitworks.png)
+
 ### For Example:
 To get e.g. the engine RPM, the "OBD2 SocketCAN Interface" Block has to generate a request message and send it on to the vehicles CAN bus. To generate this request message, the appropriate OBD2/OBD-II Parameter IDs (PID) has to be provided to the input port (OBD2_PID) of the block. To show the current data (Mode 1) an additional parameter has to be provided on the OBD2_Mode input.
 
